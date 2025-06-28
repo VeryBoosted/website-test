@@ -1,4 +1,4 @@
-/* Apply a full-page background image */
+
 body {
   height: 100%;
   margin: 0;
@@ -10,15 +10,14 @@ body {
   min-height: 100%;
 }
 
-/* Header styles */
 header {
-  background: transparent;
-  position: static;  
-  backdrop-filter: none;
+  position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   text-align: center;
+  background: none;          
+  backdrop-filter: none;     
 }
 
 .logo-container {
@@ -26,10 +25,12 @@ header {
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
+  background: transparent;
+  backdrop-filter: none;
 }
 
 .logo {
-  max-width: 450px; /* Change this size as needed */
+  max-width: 400px;         
   width: 100%;
   height: auto;
 }
