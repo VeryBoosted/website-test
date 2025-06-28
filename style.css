@@ -12,7 +12,10 @@ body {
 
 /* Header styles */
 header {
+  padding: 1.5rem;
   text-align: center;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
