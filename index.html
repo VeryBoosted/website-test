@@ -1,0 +1,72 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Github, Mail } from "lucide-react";
+
+const games = [
+  {
+    title: "Skybound",
+    description: "A 2D platformer with a unique gravity-flipping mechanic.",
+    image: "/images/skybound.png",
+    link: "https://example.com/skybound",
+  },
+  {
+    title: "Neon Drift",
+    description: "Top-down cyberpunk racing game with procedurally generated tracks.",
+    image: "/images/neon-drift.png",
+    link: "https://example.com/neon-drift",
+  },
+  {
+    title: "Echoes of Ether",
+    description: "Narrative-driven exploration game set in a forgotten realm.",
+    image: "/images/echoes.png",
+    link: "https://example.com/echoes",
+  },
+];
+
+export default function Portfolio() {
+  return (
+    <main className="p-6 max-w-5xl mx-auto">
+      <header className="mb-10 text-center">
+        <h1 className="text-4xl font-bold mb-2">Alex Devlin</h1>
+        <p className="text-gray-600 text-lg">Game Developer | Designer | World Builder</p>
+        <div className="mt-4 flex justify-center gap-4">
+          <Button variant="outline" asChild>
+            <a href="mailto:alex@example.com">
+              <Mail className="mr-2" /> Contact
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a href="https://github.com/alexdevlin">
+              <Github className="mr-2" /> GitHub
+            </a>
+          </Button>
+        </div>
+      </header>
+
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {games.map((game, index) => (
+          <Card key={index} className="rounded-2xl shadow-md overflow-hidden">
+            <img
+              src={game.image}
+              alt={game.title}
+              className="w-full h-48 object-cover"
+            />
+            <CardContent className="p-4">
+              <h2 className="text-xl font-semibold mb-1">{game.title}</h2>
+              <p className="text-sm text-gray-600 mb-2">{game.description}</p>
+              <a
+                href={game.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline text-sm"
+              >
+                View Project →
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+    </main>
+  );
+}
