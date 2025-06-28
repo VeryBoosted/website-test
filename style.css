@@ -86,6 +86,14 @@ h2 {
   height: 100%; /* ensures equal height */
 }
 
+.card-content {
+  flex-grow: 1;
+  text-align: center;     /* ⬅️ ensures the title and paragraph are centered */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* optional: vertically center inside card */
+}
+
 .card:hover {
   transform: scale(1.03);
 }
