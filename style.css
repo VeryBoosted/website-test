@@ -1,43 +1,73 @@
+/* Apply a full-page background image */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #121212;
+  background-image: url('images/background.jpg'); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #f0f0f0;
 }
 
+/* Header styles */
 header {
-  background: #1e1e1e;
-  padding: 1rem;
+  background: rgba(30, 30, 30, 0.85); /* Semi-transparent overlay for readability */
+  padding: 1.5rem;
   text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+
+nav {
+  margin-top: 0.5rem;
 }
 
 nav a {
   margin: 0 1rem;
   color: #00bcd4;
   text-decoration: none;
+  font-weight: bold;
 }
 
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
 main {
   padding: 2rem;
+  background-color: rgba(18, 18, 18, 0.8); /* Optional: readable layer over background */
+  backdrop-filter: blur(5px);
 }
 
+/* Section titles */
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Portfolio grid layout */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
+/* Game card styling */
 .card {
-  background: #2a2a2a;
+  background: rgba(42, 42, 42, 0.9);
   padding: 1rem;
   border-radius: 10px;
   text-align: center;
   transition: transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 .card:hover {
@@ -47,6 +77,17 @@ main {
 .card img {
   width: 100%;
   border-radius: 10px;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin-top: 0.75rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #cccccc;
 }
 
 .card a {
@@ -54,11 +95,24 @@ main {
   margin-top: 0.5rem;
   color: #03dac6;
   text-decoration: none;
+  font-weight: bold;
 }
 
+.card a:hover {
+  text-decoration: underline;
+}
+
+/* About section */
+#about {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* Footer */
 footer {
-  background: #1e1e1e;
+  background: rgba(30, 30, 30, 0.85);
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
+  font-size: 0.9rem;
 }
