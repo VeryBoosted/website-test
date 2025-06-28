@@ -19,9 +19,18 @@ header {
   text-align: center;
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+/* Control logo size */
 .logo {
-  max-width: 200px;
-  margin-bottom: 0.5rem;
+  max-width: 200px;     /* Adjust this as needed */
+  width: 100%;
+  height: auto;
 }
 
 header h1 {
