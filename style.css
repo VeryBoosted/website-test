@@ -99,10 +99,12 @@ h2 {
 }
 
 .card img {
+  border-radius: 16px;
+  display: block;
   width: 100%;
-  border-radius: 12px;
+  object-fit: cover;
+  overflow: hidden;
   max-height: 350px;
-  object-fit: contain;
 }
 
 .card h3 {
