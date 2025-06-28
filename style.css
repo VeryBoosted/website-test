@@ -12,10 +12,11 @@ body {
 
 /* Header styles */
 header {
+  background-color: rgba(30, 30, 30, 0.85);
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
 }
 
@@ -23,12 +24,11 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  margin-bottom: 1rem;
 }
 
-/* Control logo size */
 .logo {
-  max-width: 200px;     /* Adjust this as needed */
+  max-width: 250px; /* Change this size as needed */
   width: 100%;
   height: auto;
 }
