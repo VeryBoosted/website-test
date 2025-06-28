@@ -88,10 +88,10 @@ h2 {
 
 .card-content {
   flex-grow: 1;
-  text-align: center;     /* ⬅️ ensures the title and paragraph are centered */
+  text-align: center; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* optional: vertically center inside card */
+  justify-content: center;
 }
 
 .card:hover {
@@ -100,10 +100,9 @@ h2 {
 
 .card img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   max-height: 350px;
   object-fit: contain;
-  border-radius: 12px;
 }
 
 .card h3 {
