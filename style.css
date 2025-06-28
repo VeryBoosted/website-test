@@ -12,8 +12,8 @@ body {
 
 /* Header styles */
 header {
-  background-color: rgba(30, 30, 30, 0.85);
-  position: sticky;
+  background-color: #1e1e1e;
+  backdrop-filter: none;
   top: 0;
   z-index: 1000;
   padding: 1.5rem 1rem;
