@@ -12,7 +12,8 @@ body {
 
 /* Header styles */
 header {
-  background: transparent;  
+  background: transparent;
+  position: static;  
   backdrop-filter: none;
   top: 0;
   z-index: 1000;
