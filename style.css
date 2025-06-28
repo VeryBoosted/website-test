@@ -15,7 +15,6 @@ header {
   background: rgba(30, 30, 30, 0.85); /* Semi-transparent overlay for readability */
   padding: 1.5rem;
   text-align: center;
-  position: fixed;
   top: 0;
   z-index: 10;
 }
