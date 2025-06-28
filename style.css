@@ -15,9 +15,14 @@ header {
   background: rgba(30, 30, 30, 0.85); /* Semi-transparent overlay for readability */
   padding: 1.5rem;
   text-align: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 10;
+}
+
+.logo {
+  max-width: 200px;
+  margin-bottom: 0.5rem;
 }
 
 header h1 {
