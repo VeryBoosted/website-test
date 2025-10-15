@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multi-User Intensity Controller</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        margin-top: 60px;
+      }
+      #stimButton {
+        font-size: 24px;
+        padding: 20px 40px;
+        cursor: pointer;
+        display: none;
+      }
+      #intensityDisplay {
+        margin-top: 30px;
+        font-size: 30px;
+        font-weight: bold;
+      }
+      #bar {
+        height: 30px;
+        width: 0%;
+        background-color: limegreen;
+        margin-top: 10px;
+        transition: width 0.2s;
+      }
+      #log {
+        margin-top: 30px;
+        text-align: left;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 10px;
+        height: 150px;
+        overflow-y: auto;
+        font-family: monospace;
+      }
+      #nameInput, #joinBtn {
+        font-size: 20px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Multi-User Intensity Controller</h1>
+
+    <div id="login">
+      <input id="nameInput" placeholder="Enter your name" />
+      <button id="joinBtn">Join</button>
+    </div>
+
+    <button id="stimButton">Hold to Increase (max 5s)</button>
+    <div id="intensityDisplay">Intensity: 0</div>
+    <div id="bar"></div>
+    <h3 id="userLabel"></h3>
+    <div id="log"></div>
+
+    <script>
+      const button = document.getElementById("stimButton");
+      const display = document.getElementById("intensityDisplay");
+      const bar = document.getElementById("bar");
+      const log = document.getElementById("log");
+      const userLabel = document.getElementById("userLabel");
+      const nameInput = document.getElementById("nameInput");
+      const joinBtn = document.getElementById("joinBtn");
+      const login = document.getElementById("login");
+
+      let username = "Unknown";
+      let interval;
+      let pressTimeout;
+      let isPressing = false;
+
+      function addLog(message) {
+        const line = document.createElement("div");
+        line.textContent = message;
+        log.appendChild(line);
+        log.scrollTop = log.scrollHeight;
+      }
+
+      const ws = new WebSocket(`ws://${window.location.host}`);
+
+      joinBtn.onclick = () => {
+        const name = nameInput.value.trim() || `User_${Math.floor(Math.random() * 1000)}`;
+        username = name;
+        ws.send(JSON.stringify({ type: "setName", username: name }));
+        login.style.display = "none";
+        button.style.display = "inline-block";
+      };
+
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.type === "init") {
+          username = data.username;
+          userLabel.textContent = `You are: ${username}`;
+          display.textContent = `Intensity: ${data.intensity}`;
+          bar.style.width = `${data.intensity / 10}%`;
+          addLog(`🟢 Connected as ${username}`);
+        } else if (data.type === "update") {
+          display.textContent = `Intensity: ${data.intensity}`;
+          bar.style.width = `${data.intensity / 10}%`;
+          addLog(`🔥 ${data.user} increased intensity to ${data.intensity}`);
+        } else if (data.type === "notice") {
+          addLog(`ℹ️ ${data.message}`);
+        }
+      };
+
+      function stopPress() {
+        clearInterval(interval);
+        clearTimeout(pressTimeout);
+        isPressing = false;
+        button.disabled = false;
+        button.textContent = "Hold to Increase (max 5s)";
+      }
+
+      button.addEventListener("mousedown", () => {
+        if (isPressing) return;
+        isPressing = true;
+        button.textContent = "Increasing...";
+        interval = setInterval(() => {
+          fetch("/increase", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username }),
+          });
+        }, 200);
+
+        pressTimeout = setTimeout(() => {
+          stopPress();
+          alert("Safety cutoff: 5s max hold reached.");
+        }, 5000);
+      });
+
+      button.addEventListener("mouseup", stopPress);
+      button.addEventListener("mouseleave", stopPress);
+    </script>
+  </body>
+</html>
